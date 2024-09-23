@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Love Letter for You</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&family=Georgia&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Georgia', serif;
+            background: url('https://kawaiihoshi.com/wp-content/uploads/2023/08/peach-goma-august-boat-ride-swans-wallpaper-kawaii-hoshi.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+            display: flex;
+            justify-content: flex-end;
+            height: 100vh;
+            text-align: center;
+            padding-right: 50px;
+        }
+
+        .card {
+            background-color: rgba(255, 255, 255, 0.366);
+            padding: 20px;
+            height: 50%;
+            margin-top: 100px;
+            border-radius: 15px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+            max-width: 400px;
+            text-align: right;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            border: 2px solid pink;
+        }
+
+        h1 {
+            font-family: 'Gilroy', sans-serif;
+            font-size: 2.5rem;
+            color: black;
+            margin: 0;
+        }
+
+        #message {
+            font-size: 1.0rem;
+            margin: 10px 0;
+            opacity: 0;
+            font-weight: 700;
+            color: black;
+            font-family: 'Gilroy';
+            transition: opacity 0.5s;
+            height: 80%;
+            max-width: 600px;
+            border: 2px solid #e11559;
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+            
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 10px;
+            background-color: #6fa3ef;
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 3%;
+        }
+
+        button:hover {
+            background-color: #d4d25a;
+        }
+
+        .flying {
+            position: absolute;
+            font-size: 2rem;
+            opacity: 1;
+            animation: fly 2s forwards;
+        }
+
+        @keyframes fly {
+            0% {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(-200px) scale(2);
+                opacity: 0;
+            }
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+        }
+    </style>
+</head>
+
+<body>
+
+    
+    <div class="card">
+        <h1>Happy Birthday, Aku!</h1>
+        <div id="message">Click the button below to read your love letter!</div>
+
+        <div class="buttons">
+            <button onclick="showMessage()">Read Love Letter</button>
+            <button onclick="toggleAudio()">Play/Pause Music</button>
+        </div>
+    </div>
+
+    
+    <audio id="loveSong" src="Jo Tum Mere Ho - Djjohal.fm.mp3"></audio>
+
+    <script>
+        const icons = ['❤️', '🎂', '🎉', '🍰']; 
+        let isPlaying = false;
+
+        function showMessage() {
+            const messageElement = document.getElementById('message');
+            messageElement.textContent = " Happy Birthday, Aku!🎉🎂🍰😊 You yourself don't know what you are to me, I've understood that for a few days, I've been treating you like an unknown person. But that doesn't mean you're nothing to me. I'll just say this much - may you always be happy, and I'll pray to God that, I become the reason for your happiness😊. Let’s not forget it’s you and me VS. the problem… NOT you vs. me.. HM😊👍.";
+            messageElement.style.opacity = 1; 
+
+            
+            for (let i = 0; i < 50; i++) {
+                createFlyingIcon();
+            }
+            createFlyingText("Happy Birthday, Aku!"); 
+        }
+
+        function toggleAudio() {
+            const audioElement = document.getElementById('loveSong');
+            if (isPlaying) {
+                audioElement.pause();
+            } else {
+                audioElement.play();
+            }
+            isPlaying = !isPlaying;
+        }
+
+        function createFlyingIcon() {
+            const icon = document.createElement('div');
+            icon.className = 'flying';
+            icon.innerHTML = icons[Math.floor(Math.random() * icons.length)];
+            icon.style.left = Math.random() * 100 + 'vw';
+            icon.style.bottom = Math.random() < 0.5 ? '0' : '100%';
+            icon.style.transform = `translateY(${Math.random() < 0.5 ? '0' : '-100%'})`;
+
+            
+            document.body.appendChild(icon);
+
+            
+            icon.addEventListener('animationend', () => {
+                icon.remove();
+            });
+
+            
+            const direction = Math.random() < 0.5 ? 'left' : 'right';
+            icon.style.transform += direction === 'left' ? 'translateX(-50vw)' : 'translateX(50vw)';
+        }
+
+        function createFlyingText(text) {
+            const flyingText = document.createElement('div');
+            flyingText.className = 'flying';
+            flyingText.style.fontSize = '3rem';
+            flyingText.textContent = text;
+            flyingText.style.left = Math.random() * 100 + 'vw';
+            flyingText.style.bottom = '50%'; 
+            flyingText.style.transform = 'translateY(0)';
+
+            document.body.appendChild(flyingText);
+
+            flyingText.addEventListener('animationend', () => {
+                flyingText.remove();
+            });
+
+            const direction = Math.random() < 0.5 ? 'left' : 'right';
+            flyingText.style.transform += direction === 'left' ? 'translateX(-50vw)' : 'translateX(50vw)';
+        }
+    </script>
+
+</body>
+
+</html>
